@@ -10,7 +10,7 @@ class Feed extends Component {
   }
   registerToSocket = () => {
     console.log("Connected");
-    const socket = io("http://localhost:9988");
+    const socket = io("http://localhost:4000");
     socket.on("notification", notification => {
       console.log(notification);
       alert("Houve uma Notificação");

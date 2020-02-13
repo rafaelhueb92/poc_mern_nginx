@@ -9,11 +9,9 @@ class AppController {
   }
 
   middlewares() {
-    this.cors();
-    this.socketIO();
     this.app.use(cors());
     this.app.use(express.json());
-    this.app.use(cors());
+    this.socketIO();
   }
 
   routes() {
@@ -25,18 +23,6 @@ class AppController {
     const io = require(`socket.io`)(this.server);
     this.app.use((req, res, next) => {
       req.io = io;
-      next();
-    });
-  }
-
-  cors() {
-    this.app.use(function(_, res, next) {
-      res.setHeader("Access-Control-Allow-Origin", "*");
-      res.setHeader(
-        "Access-Control-Allow-Headers",
-        "Origin, X-Requested-With, Content-Type, Accept, Authorization"
-      );
-      res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
       next();
     });
   }
